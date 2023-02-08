@@ -16,7 +16,7 @@ db.authenticate()
 .catch((error)=>console.log(error))
 
 //alter true si existe? la tabla y es diferente al modelo? se actualiza
-db.sync({alter:true})
+db.sync({force:true})
 .then(()=>console.log("Database sincronizada"))
 .catch((error)=>console.log(error))
 
