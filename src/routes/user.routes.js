@@ -1,10 +1,11 @@
 const {Router} = require("express");
 
-const {createPerfil} = require("../controllers/user.controller");
+const {deletePerfil, allUsers} = require("../controllers/user.controller");
 
 const router = Router()
 
-router.post("/user",createPerfil)
+router.delete("/user/:id",deletePerfil)
+router.get("/user",allUsers)
 
 module.exports = router
 
