@@ -6,11 +6,20 @@ const {
 
 class UserService {
 
-    static async createUser(user) {
+    static async deleteUser(id) {
         try {
-            const result = await user.create(user)
+            const result = await user.destroy({where:{id}})
             return (result)
             
+        } catch (error) {
+            throw error
+        }
+    }
+
+    static async alluser(){
+        try {
+            const result=await user.findAll()
+            return result
         } catch (error) {
             throw error
         }

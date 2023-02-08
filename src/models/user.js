@@ -15,11 +15,9 @@ class user extends Sequelize.Model {
     },
     firstname: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     lastname: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -48,15 +46,12 @@ class user extends Sequelize.Model {
     },
     age: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     region: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     is_verify: {
       type: DataTypes.BOOLEAN,
