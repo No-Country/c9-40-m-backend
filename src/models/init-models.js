@@ -15,6 +15,7 @@ const _tecnology = require("./tecnology");
 const _user = require("./user");
 const _user_rol = require("./user_rol");
 const _user_tecnology = require("./user_tecnology");
+const rol_tecnology=require("../models/rol_tecnology")
 
 function initModels(sequelize) {
   const user = _user(sequelize, DataTypes);
@@ -34,8 +35,11 @@ function initModels(sequelize) {
   const repository = _repository(sequelize, DataTypes);
   const save_jobs_user = _save_jobs_user(sequelize, DataTypes);
   
-  rol.belongsTo(tecnology,{ as: "tecnolgy", foreignKey: "tecnolgy_id"})
-  tecnology.hasMany(rol,{as:"rol",foreignKey: "tecnolgy_id"})
+
+  rol_tecnology.belongsTo(rol,{ as: "rol", foreignKey: "rol_id"})
+  rol.hasMany(rol_tecnology,{as:"rol_tecnology",foreignKey:"rol_id"})
+  rol_tecnology.belongsTo(tecnology,{ as: "tecnolgy", foreignKey: "tecnolgy_id"})
+  tecnology.hasMany(rol_tecnology,{ as: "tecnolgy", foreignKey: "tecnolgy_id"})
 
   jobs.belongsTo(company, { as: "company", foreignKey: "company_id"});
   company.hasMany(jobs, { as: "jobs", foreignKey: "company_id"});
@@ -102,6 +106,7 @@ function initModels(sequelize) {
     user,
     user_rol,
     user_tecnology,
+    rol_tecnology
   };
 }
 module.exports = initModels;

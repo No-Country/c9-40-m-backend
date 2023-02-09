@@ -17,10 +17,6 @@ class rol extends Sequelize.Model {
       type: DataTypes.STRING,
       allowNull: false
     },
-    tecnology_id:{
-      type:DataTypes.INTEGER,
-      allowNull:false
-    }
   }, {
     sequelize,
     tableName: 'rol',
