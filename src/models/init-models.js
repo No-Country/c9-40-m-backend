@@ -34,6 +34,9 @@ function initModels(sequelize) {
   const repository = _repository(sequelize, DataTypes);
   const save_jobs_user = _save_jobs_user(sequelize, DataTypes);
   
+  rol.belongsTo(tecnology,{ as: "tecnolgy", foreignKey: "tecnolgy_id"})
+  tecnology.hasMany(rol,{as:"rol",foreignKey: "tecnolgy_id"})
+
   jobs.belongsTo(company, { as: "company", foreignKey: "company_id"});
   company.hasMany(jobs, { as: "jobs", foreignKey: "company_id"});
   jobs_rol.belongsTo(jobs, { as: "job", foreignKey: "jobs_id"});
