@@ -46,9 +46,9 @@ static async rol_job(arrayRol,job_id){
 
 static async deleteJob(idJob,userId){
     try {
-        const result=await jobs.destroy({where:{id:idJob,user_id:userId}})
         const deleteTecno=await jobs_tecnology.destroy({where:{jobs_id:idJob}})
         const deleteRol=await jobs_rol.destroy({where:{jobs_id:idJob}})
+        const result=await jobs.destroy({where:{id:idJob,user_id:userId}})
         return result
     } catch (error) {
         throw error
