@@ -38,8 +38,8 @@ function initModels(sequelize) {
 
   rol_tecnology.belongsTo(rol,{ as: "rol", foreignKey: "rol_id"})
   rol.hasMany(rol_tecnology,{as:"rol_tecnology",foreignKey:"rol_id"})
-  rol_tecnology.belongsTo(tecnology,{ as: "tecnolgy", foreignKey: "tecnolgy_id"})
-  tecnology.hasMany(rol_tecnology,{ as: "tecnolgy", foreignKey: "tecnolgy_id"})
+  rol_tecnology.belongsTo(tecnology,{ as: "tecnology", foreignKey: "tecnology_id"})
+  tecnology.hasMany(rol_tecnology,{ as: "rol_tecnology", foreignKey: "tecnology_id"})
 
   jobs.belongsTo(company, { as: "company", foreignKey: "company_id"});
   company.hasMany(jobs, { as: "jobs", foreignKey: "company_id"});
@@ -61,10 +61,10 @@ function initModels(sequelize) {
   rol.hasMany(jobs_rol, { as: "jobs_rols", foreignKey: "rol_id"});
   user_rol.belongsTo(rol, { as: "rol", foreignKey: "rol_id"});
   rol.hasMany(user_rol, { as: "user_rols", foreignKey: "rol_id"});
-  jobs_tecnology.belongsTo(tecnology, { as: "tecnolgy", foreignKey: "tecnolgy_id"});
-  tecnology.hasMany(jobs_tecnology, { as: "jobs_tecnologies", foreignKey: "tecnolgy_id"});
-  user_tecnology.belongsTo(tecnology, { as: "tecnolgy", foreignKey: "tecnolgy_id"});
-  tecnology.hasMany(user_tecnology, { as: "user_tecnologies", foreignKey: "tecnolgy_id"});
+  jobs_tecnology.belongsTo(tecnology, { as: "tecnology", foreignKey: "tecnology_id"});
+  tecnology.hasMany(jobs_tecnology, { as: "jobs_tecnologies", foreignKey: "tecnology_id"});
+  user_tecnology.belongsTo(tecnology, { as: "tecnology", foreignKey: "tecnology_id"});
+  tecnology.hasMany(user_tecnology, { as: "user_tecnologies", foreignKey: "tecnology_id"});
   company.belongsTo(user, { as: "user", foreignKey: "user_id"});
   user.hasMany(company, { as: "companies", foreignKey: "user_id"});
   jobs.belongsTo(user, { as: "user", foreignKey: "user_id"});

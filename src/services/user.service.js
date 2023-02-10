@@ -1,7 +1,16 @@
 const models = require("../models/index");
 const bcrypt=require("bcrypt")
 const {
-    user 
+    user,
+    user_tecnology,
+    user_rol,
+    tecnology,
+    rol,
+    projects,
+    postulation_job_user,
+    jobs,
+    postulation_job_reclutier,
+    match
 } = models
 
 class UserService {
@@ -49,7 +58,58 @@ class UserService {
 
     static async getOne(id){
         try {
-            const result=await user.findByPk(id)
+            const result=await user.findByPk(id,{
+                include:[
+                    /* 
+                    {model:match,
+                    as:"matches",
+                    attributes:["jobs_id"],
+                    include:{
+                    model:jobs,
+                    as:"job",
+                    attributes:{exclude:["id"]}
+                    }
+                    },*/
+                    {model:user_tecnology,
+                    as:"user_tecnology",
+                    attributes:["tecnolgy_id"],
+                    include:{
+                        model:tecnology,
+                        as:"tecnolgy",
+                        attributes:["name"]
+                    }
+                    },
+                    {model:user_rol,
+                    as:"user_rols",
+                    attributes:["rol_id"],
+                    include:{
+                        model:rol,
+                        as:"rol",
+                        attributes:["name"]
+                    }
+                    },
+                    /* 
+                    {model:postulation_job_user,
+                    as:"postulation_job_users",
+                    attributes:["jobs_id","state"],
+                    include:{
+                    model:jobs,
+                    as:"jobs",
+                    attributes:{exclude:["id"]}
+                    }
+                    },
+                    {model:jobs,
+                    as:"jobs",
+                    //attributes:{exclude:["id"]},
+                    include:{
+                    model:postulation_job_reclutier,
+                    as:"postulation_job_reclutiers",
+                    attributes:["user_id","state"]
+                    }
+                    },
+                    */
+                ]
+            })
             return result
         } catch (error) {
         throw error        
