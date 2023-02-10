@@ -38,10 +38,6 @@ class projects extends Sequelize.Model {
       type: DataTypes.STRING,
       allowNull: true
     },
-    tecnolgy_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     image: {
       type: DataTypes.STRING,
       allowNull: true
