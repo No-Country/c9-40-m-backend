@@ -7,9 +7,17 @@ const createJobb=async(req,res)=>{
         token=token.replace("Bearer ","")
         const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
         const {id}=tokendecode
-        const job=req.body
-        const result=await JobsServices.createJob(job,id)
-        res.json(result)
+        const {title,description,image,company_id,user_id,country,work_place,working_day,tecnologies_job,roles_job,job_salary}=req.body
+        const result=await JobsServices.createJob({title,description,image,company_id,user_id,country,work_place,working_day},id)
+        tecnologies_job.forEach(async tecno_id=>{
+            const createJobtecno=await JobsServices.tecnology_job(tecno_id,result.id)
+        })
+        roles_job.forEach(async rol_id=>{
+            const createRoljob=await JobsServices.rol_job(rol_id,result.id)
+        })
+        job_salary.job_id=result.id
+        const createdSalary=await JobsServices.postSalary(job_salary)
+        res.status(201).json({message:"job created ;)"},result)
     } catch (error) {
         res.status(400).json({message:"error"})
     }
@@ -23,11 +31,23 @@ const updateJob=async(req,res)=>{
         const {id}=tokendecode
         const updateJob=req.body
         const result= await JobsServices.putJob(updateJob,id)
-        res.json(result)
+        res.json({message:"job update"},result)
     } catch (error) {
         res.status(400).json({message:"error"})
     }
 }
+
+const updateSalary=async(req,res)=>{
+    try {
+       const {id} =req.params
+       const newSalary =req.body
+       const result=await JobsServices.putSalary(newSalary,id)
+       res.json({message:"salary update :)"},result)
+    } catch (error) {
+    res.status(400).json({message:"error"})
+    }
+}
+
 
 const deleJob=async(req,res)=>{
     try {
@@ -74,6 +94,8 @@ const createCompany=async(req,res)=>{
     }
 }
 
+
+
 const upCompany=async(req,res)=>{
     try {
         const{id}=req.params
@@ -85,6 +107,49 @@ const upCompany=async(req,res)=>{
     }
 }
 
+const deleteJobRol=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const {rol_id}=req.body
+        const result=await JobsServices.deleteRoljob(id,rol_id)
+        res.json(result)
+    } catch (error) {
+        res.status(400).json({message:"error"})
+    }
+}
+
+const deleteTecnojob=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const {tecnology_id}=req.body
+        const result=await JobsServices.deleteTecnologyjob(id,tecnology_id)
+        res.json(result)
+    } catch (error) {
+        res.status(400).json({message:"error"})
+    }
+}
+
+const aggnewTecnology=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const{tecnology_id}=req.body
+        const result=await JobsServices.tecnology_job(tecnology_id,id)
+        res.json(result)
+    } catch (error) {
+        res.status(400).json({message:"error"})
+    }
+}
+
+const aggrolJob=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const{rol_id}=req.body
+        const result=await JobsServices.rol_job(rol_id,id)
+        res.json(result)
+    } catch (error) {
+        res.status(400).json({message:"error"})
+    }
+}
 
 module.exports={
     getJobforOne,
@@ -93,5 +158,11 @@ module.exports={
     createJobb,
     getjobs,
     createCompany,
-    upCompany
+    upCompany,
+
+    aggnewTecnology,
+    aggrolJob,
+    deleteJobRol,
+    deleteTecnojob,
+    updateSalary,
 }

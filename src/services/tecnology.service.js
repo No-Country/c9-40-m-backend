@@ -1,5 +1,5 @@
 const models=require("../models/index")
-const{tecnology,rol_tecnology}=models
+const{tecnology,rol_tecnology,user_tecnology,jobs_tecnology}=models
 
 class tecnologyServices{
 
@@ -23,6 +23,8 @@ static async getAlltecno(){
 
 static async deleteTecnologyz(id){
     try {
+        const jobsTecnology=await jobs_tecnology.destroy({where:{tecnology_id:id}})
+        const userTecnology=await user_tecnology.destroy({where:{tecnology_id:id}})
         const deleterolTec=await rol_tecnology.destroy({where:{tecnology_id:id}})
         const result=await tecnology.destroy({where:{id}})
         return result

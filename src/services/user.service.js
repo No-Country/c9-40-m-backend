@@ -19,7 +19,6 @@ class UserService {
         try {
             const result = await user.destroy({where:{id}})
             return (result)
-            
         } catch (error) {
             throw error
         }
