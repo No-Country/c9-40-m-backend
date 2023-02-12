@@ -10,13 +10,25 @@ const {
     postulation_job_user,
     jobs,
     postulation_job_reclutier,
-    match
+    match,
+    jobs_rol,
+    jobs_tecnology,
+    company
 } = models
 
 class UserService {
 
     static async deleteUser(id) {
         try {
+            const userrolz=await user_rol.destroy({where:{user_id:id}})
+            const user_rolldelete=await user_tecnology.destroy({where:{user_id:id}})
+            const posuser=await postulation_job_reclutier.destroy({where:{user_id:id}})
+            const pore=await postulation_job_user.destroy({where:{user_id:id}})
+            const delete4=await match.destroy({where:{user_id:id}})
+            const delete3=await jobs_tecnology.destroy({where:{user_id:id}})
+            const delete2=await jobs_rol.destroy({where:{user_id:id}})
+            const compa=await company.destroy({where:{user_id:id}})
+            const delete1=await jobs.destroy({where:{user_id:id}})
             const result = await user.destroy({where:{id}})
             return (result)
         } catch (error) {

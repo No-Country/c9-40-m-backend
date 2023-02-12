@@ -1,11 +1,12 @@
 const {Router}=require("express");
-const { getJobforOne, deleJob, updateJob, createJobb, getjobs, createCompany, upCompany, aggnewTecnology, aggrolJob, deleteJobRol, deleteTecnojob, updateSalary } = require("../controllers/jobs.controller");
+const { getJobforOne, deleJob, updateJob, createJobb, getjobs, createCompany, upCompany, aggnewTecnology, aggrolJob, deleteJobRol, deleteTecnojob, updateSalary, deleteCompany } = require("../controllers/jobs.controller");
 
 const router=Router()
 
 
 router.post("/company",createCompany)
 router.put("/company/:id",upCompany)
+router.delete("/company/:id",deleteCompany)
 
 router.get("/jobs/:id",getJobforOne)
 router.delete("/jobs/:id",deleJob)

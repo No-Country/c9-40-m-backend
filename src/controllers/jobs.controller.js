@@ -151,14 +151,43 @@ const aggrolJob=async(req,res)=>{
     }
 }
 
+const jobscreateByuser=async(req,res)=>{
+    try {
+        let token=req.headers.authorization
+        token=token.replace("Bearer ","")
+        const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
+        const {id}=tokendecode
+        const result=await JobsServices.getJobsbyuser(id)
+        res.json(result)
+    } catch (error) {
+        res.status(400).json({message:"error"})
+    }
+}
+
+const deleteCompany=async(req,res)=>{
+    try {
+        let token=req.headers.authorization
+        token=token.replace("Bearer ","")
+        const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
+        const {id}=tokendecode
+        const idcompany=req.params.id
+        const result=await JobsServices.deleteCOMpany(id,idcompany)
+        res.json(result)
+    } catch (error) {
+        res.status(400).json({message:"error"})
+}
+}
+
 module.exports={
     getJobforOne,
     deleJob,
     updateJob,
     createJobb,
     getjobs,
+    jobscreateByuser,
     createCompany,
     upCompany,
+    deleteCompany,
 
     aggnewTecnology,
     aggrolJob,

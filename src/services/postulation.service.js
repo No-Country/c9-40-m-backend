@@ -7,9 +7,14 @@ class postulationServices{
 
 static async createPostulation(idUser,idJob){
     try {
+        const findJob=await jobs.findOne({where:{id:idJob,user_id:idUser}})
+        if(findJob){
+            return {message:"no puede postular a una vacante que usted publicó"}
+        }else{
         const postReclutier=await postulation_job_reclutier.create({user_id:idUser,jobs_id:idJob,state:"waiting"})
         const result=await postulation_job_user.create({user_id:idUser,jobs_id:idJob,state:"waiting"})
         return result
+        }
     } catch (error) {
         throw error
     }
