@@ -7,7 +7,7 @@ const {
   user_rol,
   salary,
   tecnology,
-  saveJobUser,
+  save_jobs_user,
   projects,
   company,
   jobs_tecnology,
@@ -189,22 +189,22 @@ const tecnologyy = [
 const savesJobUser = [
   {
     user_id: 1,
-    job_id: 1,
+    job_id: 4,
   },
 
   {
     user_id: 2,
-    job_id: 2,
-  },
-
-  {
-    user_id: 3,
     job_id: 3,
   },
 
   {
+    user_id: 3,
+    job_id: 2,
+  },
+
+  {
     user_id: 4,
-    job_id: 4,
+    job_id: 1,
   },
 ];
 
@@ -338,6 +338,7 @@ const jobs_tecnologyy = [
   },
 ];
 
+/*
 const matchh = [
   {
     user_id: 1,
@@ -359,7 +360,7 @@ const matchh = [
     jobs_id: 4,
   },
 ];
-
+*/
 const jobs_roll = [
   {
     rol_id: 1,
@@ -385,52 +386,52 @@ const jobs_roll = [
 const postulation_job_userr = [
   {
     user_id: 1,
-    job_id: 1,
-    state: "En espera",
+    job_id: 4,
+    state: "waiting",
   },
 
   {
     user_id: 2,
-    job_id: 2,
-    state: "Rechazada",
+    job_id: 3,
+    state: "waiting",
   },
 
   {
     user_id: 3,
-    job_id: 3,
-    state: "En espera",
+    job_id: 2,
+    state: "waiting",
   },
 
   {
     user_id: 4,
-    job_id: 4,
-    state: "Aceptada",
+    job_id: 1,
+    state: "waiting",
   },
 ];
 
 const postulation_job_reclutierr = [
   {
     user_id: 1,
-    jobs_id: 1,
-    state: "En espera",
+    jobs_id: 4,
+    state: "waiting",
   },
 
   {
     user_id: 2,
-    jobs_id: 2,
-    state: "Aceptada",
+    jobs_id: 3,
+    state: "waiting",
   },
 
   {
     user_id: 3,
-    jobs_id: 3,
-    state: "Rechazada",
+    jobs_id: 2,
+    state: "waiting",
   },
 
   {
     user_id: 4,
-    jobs_id: 4,
-    state: "Rechazada",
+    jobs_id: 1,
+    state: "waiting",
   },
 ];
 
@@ -533,46 +534,47 @@ db.sync({ force: true }).then(() => {
   }, 500);
 
   setTimeout(() => {
-    savesJobUser.forEach((sju) => saveJobUser(sju));
+    savesJobUser.forEach((sju) => save_jobs_user.create(sju));
   }, 600);
 
   setTimeout(() => {
-    projectss.forEach((p) => projects(p));
+    projectss.forEach((p) => projects.create(p));
   }, 700);
 
   setTimeout(() => {
-    companyy.forEach((c) => company(c));
+    companyy.forEach((c) => company.create(c));
   }, 800);
 
   setTimeout(() => {
-    jobs_tecnologyy.forEach((jt) => jobs_tecnology(jt));
+    jobs_tecnologyy.forEach((jt) => jobs_tecnology.create(jt));
   }, 900);
 
+/*
   setTimeout(() => {
-    matchh.forEach((m) => match(m));
+    matchh.forEach((m) => match.create(m));
   }, 1000);
-
+*/
   setTimeout(() => {
-    jobs_roll.forEach((jr) => jobs_rol(jr));
+    jobs_roll.forEach((jr) => jobs_rol.create(jr));
   }, 1100);
 
   setTimeout(() => {
-    postulation_job_userr.forEach((pju) => postulation_job_user(pju));
+    postulation_job_userr.forEach((pju) => postulation_job_user.create(pju));
   }, 1200);
 
   setTimeout(() => {
-    postulation_job_reclutierr.forEach((pjr) => postulation_job_reclutier(pjr));
+    postulation_job_reclutierr.forEach((pjr) => postulation_job_reclutier.create(pjr));
   }, 1300);
 
   setTimeout(() => {
-    rol_tecnologyy.forEach((rt) => rol_tecnology(rt));
+    rol_tecnologyy.forEach((rt) => rol_tecnology.create(rt));
   }, 1400);
 
   setTimeout(() => {
-    user_tecnologyy.forEach((ut) => user_tecnology(ut));
+    user_tecnologyy.forEach((ut) => user_tecnology.create(ut));
   }, 1500);
 
   setTimeout(() => {
-    repositoryy.forEach((ry) => repository(ry));
+    repositoryy.forEach((ry) => repository.create(ry));
   }, 1600);
 });

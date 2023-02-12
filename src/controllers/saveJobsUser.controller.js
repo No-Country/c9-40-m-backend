@@ -15,4 +15,35 @@ const saveJobsUserCreate = async (req, res) => {
   }
 };
 
-module.exports = { saveJobsUserCreate };
+const deleteSavejobs=async(req,res)=>{
+  try {
+    const idJob = req.params.id;
+    let token = req.headers.authorization;
+    token = token.replace("Bearer ", "");
+    const tokendecode = jwt.verify(token, process.env.JWT_SECRET);
+    const { id } = tokendecode;
+    const result = await saveJobsUsersService.deleteSavejobb(idJob, id);
+    res.json(result)
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+}
+
+const getAlljobsbyuser=async(req,res)=>{
+  try {
+    let token = req.headers.authorization;
+    token = token.replace("Bearer ", "");
+    const tokendecode = jwt.verify(token, process.env.JWT_SECRET);
+    const { id } = tokendecode;
+    const result=await saveJobsUsersService.getAllsavejobsByuser(id)
+    res.json(result)
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+}
+
+module.exports = { 
+  saveJobsUserCreate,
+  getAlljobsbyuser,
+  deleteSavejobs
+};

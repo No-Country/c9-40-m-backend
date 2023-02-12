@@ -10,7 +10,7 @@ if(result){
     await transporter.sendMail({
         to:result.email,
         from:"bryandavidaaa@gmail.com",
-        subject:"email confirmado",
+        subject:"confirme su email",
         html:"<h2>hola</h2>"
     })
 }else{res.status(400).json({message:"somethign wrong"})}

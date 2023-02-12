@@ -172,7 +172,24 @@ static async updateCompany(id,updatecom){
     }
 }
 
+static async getJobsbyuser(id){
+    try {
+    const result=await jobs.findAll({where:{user_id:id}})
+    return result
+    } catch (error) {
+        throw error
+    }
+}
 
+static async deleteCOMpany(iduser,idcompany){
+    try {
+        const fin=await jobs.update({company_id:null},{where:{company_id:idcompany}})
+        const result=await company.destroy({where:{id:idcompany,user_id:iduser}})
+        return result
+    } catch (error) {
+        throw error
+    }
+}
 
 }
 
