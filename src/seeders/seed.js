@@ -1,0 +1,578 @@
+const db = require("../utils/database");
+
+const {
+  user,
+  jobs,
+  rol,
+  user_rol,
+  salary,
+  tecnology,
+  saveJobUser,
+  projects,
+  company,
+  jobs_tecnology,
+  match,
+  jobs_rol,
+  postulation_job_user,
+  postulation_job_reclutier,
+  rol_tecnology,
+  user_tecnology,
+  repository,
+} = require("../models");
+
+const users = [
+  {
+    firstname: "José",
+    lastname: "Riga",
+    email: "joseRiga12@gmail.com",
+    password: "18/569",
+  },
+  {
+    firstname: "Julio",
+    lastname: "Shultz",
+    email: "shultz12@gmail.com",
+    password: "18/569",
+  },
+  {
+    firstname: "Dario",
+    lastname: "Martinez",
+    email: "Martinez45@gmail.com",
+    password: "18/569",
+  },
+  {
+    firstname: "Diego",
+    lastname: "Diaz",
+    email: "Diaz69@gmail.com",
+    password: "18/569",
+  },
+];
+
+const jobss = [
+  {
+    title: "Developer Front-End",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    image:
+      "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    country: "Uruguay",
+    work_place: "Remote",
+    working_day: "Part-time",
+    user_id: 1,
+  },
+
+  {
+    title: "Developer Back-End",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    image:
+      "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    country: "Argentina",
+    work_place: "Presencial",
+    working_day: "Full-Time",
+    user_id: 2,
+  },
+
+  {
+    title: "Diseñador UX/UI",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    image:
+      "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    country: "Colombia",
+    work_place: "Remote",
+    working_day: "Full-Time",
+    user_id: 3,
+  },
+
+  {
+    title: "Full Stack Mern",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    image:
+      "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    country: "Venezuela",
+    work_place: "Remote",
+    working_day: "Full-Time",
+    user_id: 4,
+  },
+];
+
+const rols = [
+  {
+    name: "Developer Back.End",
+  },
+
+  {
+    name: "Front-End",
+  },
+
+  {
+    name: "Diseñador UX/UI",
+  },
+
+  {
+    name: "Full Stack Mern",
+  },
+];
+
+const userRol = [
+  {
+    rol_id: 1,
+    user_id: 1,
+  },
+
+  {
+    rol_id: 2,
+    user_id: 2,
+  },
+
+  {
+    rol_id: 3,
+    user_id: 3,
+  },
+
+  {
+    rol_id: 4,
+    user_id: 4,
+  },
+];
+
+const salaryy = [
+  {
+    job_id: 1,
+    price_min: 300,
+    price_max: 500,
+    price: 400,
+    to_agree: true,
+  },
+
+  {
+    job_id: 2,
+    price_min: 500,
+    price_max: 900,
+    price: 600,
+    to_agree: true,
+  },
+
+  {
+    job_id: 3,
+    price_min: 1000,
+    price_max: 1200,
+    price: 900,
+    to_agree: true,
+  },
+
+  {
+    job_id: 4,
+    price_min: 400,
+    price_max: 600,
+    price: 450,
+    to_agree: true,
+  },
+];
+
+const tecnologyy = [
+  {
+    name: "Java",
+  },
+  {
+    name: "Node JS",
+  },
+  {
+    name: "React",
+  },
+  {
+    name: "Figma",
+  },
+];
+
+const savesJobUser = [
+  {
+    user_id: 1,
+    job_id: 1,
+  },
+
+  {
+    user_id: 2,
+    job_id: 2,
+  },
+
+  {
+    user_id: 3,
+    job_id: 3,
+  },
+
+  {
+    user_id: 4,
+    job_id: 4,
+  },
+];
+
+const projectss = [
+  {
+    user_id: 1,
+    title_project: "E-commerce - Tienda de Ropa",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    featured: false,
+    url: "https://dictionary.cambridge.org/es/diccionario/ingles/repository",
+    tecnology_id: 1,
+    image:
+      "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    partnership: false,
+  },
+
+  {
+    user_id: 2,
+    title_project: "Blog de noticias",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    featured: false,
+    url: "https://dictionary.cambridge.org/es/diccionario/ingles/repository",
+    tecnology_id: 2,
+    image:
+      "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    partnership: false,
+  },
+
+  {
+    user_id: 3,
+    title_project: "Diseño de app mobile",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    featured: false,
+    url: "https://dictionary.cambridge.org/es/diccionario/ingles/repository",
+    tecnology_id: 3,
+    image:
+      "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    partnership: false,
+  },
+
+  {
+    user_id: 4,
+    title_project: "Gamming",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    featured: false,
+    url: "https://dictionary.cambridge.org/es/diccionario/ingles/repository",
+    tecnology_id: 4,
+    image:
+      "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    partnership: false,
+  },
+];
+
+const companyy = [
+  {
+    user_id: 1,
+    name: "Agro Company IT",
+    contry: "Brasil",
+    city: "San Pablo",
+    phone: "15648466",
+    adress: "Jao Marco 54",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    website: "https://www.adecoagro.com/",
+    verified: false,
+  },
+
+  {
+    user_id: 2,
+    name: "Consultors IT",
+    contry: "Argentina",
+    city: "CABA",
+    phone: "1564888466",
+    adress: "Saavedra 451",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    website: "https://www.adecoagro.com/",
+    verified: false,
+  },
+
+  {
+    user_id: 3,
+    name: "Drako IT",
+    contry: "Uruguay",
+    city: "Montevideo",
+    phone: "158484963",
+    adress: "Llanez 21",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    website: "https://www.adecoagro.com/",
+    verified: false,
+  },
+
+  {
+    user_id: 4,
+    name: "Education IT",
+    contry: "Argentina",
+    city: "CABA",
+    phone: "864565",
+    adress: "Lavalle 235",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    website: "https://www.adecoagro.com/",
+    verified: false,
+  },
+];
+
+const jobs_tecnologyy = [
+  {
+    jobs_id: 1,
+    rol_id: 1,
+  },
+
+  {
+    jobs_id: 2,
+    rol_id: 2,
+  },
+
+  {
+    jobs_id: 3,
+    rol_id: 3,
+  },
+
+  {
+    jobs_id: 4,
+    rol_id: 4,
+  },
+];
+
+const matchh = [
+  {
+    user_id: 1,
+    jobs_id: 1,
+  },
+
+  {
+    user_id: 2,
+    jobs_id: 2,
+  },
+
+  {
+    user_id: 3,
+    jobs_id: 3,
+  },
+
+  {
+    user_id: 4,
+    jobs_id: 4,
+  },
+];
+
+const jobs_roll = [
+  {
+    rol_id: 1,
+    jobs_rol: 1,
+  },
+
+  {
+    rol_id: 2,
+    jobs_rol: 2,
+  },
+
+  {
+    rol_id: 3,
+    jobs_rol: 3,
+  },
+
+  {
+    rol_id: 4,
+    jobs_rol: 4,
+  },
+];
+
+const postulation_job_userr = [
+  {
+    user_id: 1,
+    job_id: 1,
+    state: "En espera",
+  },
+
+  {
+    user_id: 2,
+    job_id: 2,
+    state: "Rechazada",
+  },
+
+  {
+    user_id: 3,
+    job_id: 3,
+    state: "En espera",
+  },
+
+  {
+    user_id: 4,
+    job_id: 4,
+    state: "Aceptada",
+  },
+];
+
+const postulation_job_reclutierr = [
+  {
+    user_id: 1,
+    jobs_id: 1,
+    state: "En espera",
+  },
+
+  {
+    user_id: 2,
+    jobs_id: 2,
+    state: "Aceptada",
+  },
+
+  {
+    user_id: 3,
+    jobs_id: 3,
+    state: "Rechazada",
+  },
+
+  {
+    user_id: 4,
+    jobs_id: 4,
+    state: "Rechazada",
+  },
+];
+
+const rol_tecnologyy = [
+  {
+    rol_id: 1,
+    tecnology_id: 1,
+  },
+
+  {
+    rol_id: 2,
+    tecnology_id: 2,
+  },
+
+  {
+    rol_id: 3,
+    tecnology_id: 3,
+  },
+
+  {
+    rol_id: 4,
+    tecnology_id: 4,
+  },
+];
+
+const user_tecnologyy = [
+  {
+    user_id: 1,
+    tecnology_id: 1,
+    years_tecnology: 1,
+  },
+
+  {
+    user_id: 2,
+    tecnology_id: 2,
+    years_tecnology: 5,
+  },
+
+  {
+    user_id: 3,
+    tecnology_id: 3,
+    years_tecnology: 2,
+  },
+
+  {
+    user_id: 4,
+    tecnology_id: 4,
+    years_tecnology: 0,
+  },
+];
+
+const repositoryy = [
+  {
+    user_id: 1,
+    name: "usuario 1",
+    url: "https://dictionary.cambridge.org/es/diccionario/ingles/repository",
+  },
+
+  {
+    user_id: 2,
+    name: "usuario 2",
+    url: "https://dictionary.cambridge.org/es/diccionario/ingles/repository",
+  },
+
+  {
+    user_id: 3,
+    name: "usuario 3",
+    url: "https://dictionary.cambridge.org/es/diccionario/ingles/repository",
+  },
+
+  {
+    user_id: 4,
+    name: "usuario 4",
+    url: "https://dictionary.cambridge.org/es/diccionario/ingles/repository",
+  },
+];
+
+db.sync({ force: true }).then(() => {
+  console.log("sincronizando");
+  users.forEach((u) => user.create(u));
+
+  setTimeout(() => {
+    jobss.forEach((j) => jobs.create(j));
+  }, 100);
+
+  setTimeout(() => {
+    rols.forEach((r) => rol.create(r));
+  }, 200);
+
+  setTimeout(() => {
+    userRol.forEach((ur) => user_rol.create(ur));
+  }, 300);
+
+  setTimeout(() => {
+    salaryy.forEach((s) => salary.create(s));
+  }, 400);
+
+  setTimeout(() => {
+    tecnologyy.forEach((s) => tecnology.create(s));
+  }, 500);
+
+  setTimeout(() => {
+    savesJobUser.forEach((sju) => saveJobUser(sju));
+  }, 600);
+
+  setTimeout(() => {
+    projectss.forEach((p) => projects(p));
+  }, 700);
+
+  setTimeout(() => {
+    companyy.forEach((c) => company(c));
+  }, 800);
+
+  setTimeout(() => {
+    jobs_tecnologyy.forEach((jt) => jobs_tecnology(jt));
+  }, 900);
+
+  setTimeout(() => {
+    matchh.forEach((m) => match(m));
+  }, 1000);
+
+  setTimeout(() => {
+    jobs_roll.forEach((jr) => jobs_rol(jr));
+  }, 1100);
+
+  setTimeout(() => {
+    postulation_job_userr.forEach((pju) => postulation_job_user(pju));
+  }, 1200);
+
+  setTimeout(() => {
+    postulation_job_reclutierr.forEach((pjr) => postulation_job_reclutier(pjr));
+  }, 1300);
+
+  setTimeout(() => {
+    rol_tecnologyy.forEach((rt) => rol_tecnology(rt));
+  }, 1400);
+
+  setTimeout(() => {
+    user_tecnologyy.forEach((ut) => user_tecnology(ut));
+  }, 1500);
+
+  setTimeout(() => {
+    repositoryy.forEach((ry) => repository(ry));
+  }, 1600);
+});
