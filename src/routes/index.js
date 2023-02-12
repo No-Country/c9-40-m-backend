@@ -5,6 +5,9 @@ const jobsRoutes=require("./jobs.routes")
 const matchRoutes=require("./matche.routes")
 const postulatioRoutes=require("./postulation.routes")
 const proyects_and_repositoriesRoutes=require("./proyects_and_repository.routes")
+const jobsRoutes = require("./jobs.routes");
+const saveJobsUserRoutes = require("./saveJobsUser.routes");
+
 
 const RoutesApp = (app) => {
   app.use("/api/v1", usersRoutes);
@@ -14,6 +17,7 @@ const RoutesApp = (app) => {
   app.use("/api/v1", matchRoutes);
   app.use("/api/v1", postulatioRoutes);
   app.use("/api/v1",proyects_and_repositoriesRoutes)
+  app.use("/api/v1", saveJobsUserRoutes);
 };
 
 module.exports = RoutesApp;
