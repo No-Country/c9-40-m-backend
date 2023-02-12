@@ -3,6 +3,8 @@ const authRoutes = require("./auth.routes");
 const rolRoutes = require("./rol.routes");
 const jobsRoutes=require("./jobs.routes")
 const matchRoutes=require("./matche.routes")
+const postulatioRoutes=require("./postulation.routes")
+const proyects_and_repositoriesRoutes=require("./proyects_and_repository.routes")
 
 const RoutesApp = (app) => {
   app.use("/api/v1", usersRoutes);
@@ -10,6 +12,8 @@ const RoutesApp = (app) => {
   app.use("/api/v1/rol", rolRoutes);
   app.use("/api/v1", jobsRoutes);
   app.use("/api/v1", matchRoutes);
+  app.use("/api/v1", postulatioRoutes);
+  app.use("/api/v1",proyects_and_repositoriesRoutes)
 };
 
 module.exports = RoutesApp;

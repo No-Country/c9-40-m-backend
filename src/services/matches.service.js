@@ -1,11 +1,19 @@
 const models=require("../models/index")
-const{match,postulation_job_user,postulation_job_reclutier}=models
+const{match,postulation_job_user,postulation_job_reclutier,jobs}=models
 
 class MatchServices{
 
 static async getMatches(id){
 try {
-    const result=await match.findAll({where:{user_id:id}})
+    const result=await match.findAll({
+        attributes:{exclude:["user_id"]},
+        where:{user_id:id},
+        include:{
+            model:jobs,
+            as:"job",
+            attributes:{exclude:["id"]}
+        }
+    })
     return result
 } catch (error) {
     throw error

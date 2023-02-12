@@ -49,6 +49,7 @@ static async getpostulationByuser(id,size,page){
             }
         const result=await postulation_job_user.findAndCountAll(options,{
             where:{user_id:id},
+            attributes:{exclude:["user_id"]},
             include:{
             model: jobs,
             as:"job",
@@ -62,7 +63,15 @@ static async getpostulationByuser(id,size,page){
 
 static async getPostulationbyJob(id){
     try {
-        const result=await postulation_job_reclutier.findAll({where:{jobs_id:id}})
+        const result=await postulation_job_reclutier.findAll({
+            where:{jobs_id:id},
+            attributes:{exclude:["user_id"]},
+            where:{user_id:id},
+            include:{
+            model: jobs,
+            as:"job",
+            }
+        })
         return result
     } catch (error) {
         throw error
