@@ -1,5 +1,6 @@
 const AuthServices = require("../services/auth.service")
 const transporter=require("../utils/mailer")
+const jwt = require("jsonwebtoken");
 
 const register=async(req,res)=>{
     try {
@@ -9,7 +10,7 @@ if(result){
     res.status(201).json({message:"user created",result})
     await transporter.sendMail({
         to:result.email,
-        from:"bryandavidaaa@gmail.com",
+        from:"jobsmatch23@gmail.com",
         subject:"confirme su email",
         html:"<h2>hola</h2>"
     })

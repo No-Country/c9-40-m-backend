@@ -1,3 +1,4 @@
+
 const models=require("../models/index")
 const{tecnology,rol_tecnology,user_tecnology,jobs_tecnology}=models
 
@@ -32,6 +33,41 @@ static async deleteTecnologyz(id){
         throw error
     }
 }
+
+static async createTecnoByuser(newTecno){
+    try {
+        const result=await user_tecnology.create(newTecno)
+        return result
+    } catch (error) {
+        throw error
+    }
+}
+
+static async deletetecnoByuser(iduser,idtecnology){
+    try {
+        const result=await user_tecnology.destroy({where:{user_id:iduser,tecnology_id:idtecnology}})
+        return result
+    } catch (error) {
+        throw error
+    }
+}
+
+static async getAllusertecno(id){
+    try {
+        const result=await user_tecnology.findAll({
+            where:{user_id:id},
+            include:{
+             model:tecnology,
+             as:"tecnology",
+             attributes:{exclude:["id"]}   
+            }
+        })
+        return result
+    } catch (error) {
+        throw error
+    }
+}
+
 
 }
 

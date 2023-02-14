@@ -53,10 +53,19 @@ const getOneuser=async(req,res)=>{
 }
 
 
-
+const getOneuserByid=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const result=await UserService.getOne(id)
+        res.json(result)
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+}
 module.exports = {
     deletePerfil,
     allUsers,
     updateUser,
-    getOneuser
+    getOneuser,
+    getOneuserByid
 }

@@ -10,7 +10,9 @@ const {
     jobs_rol,
     tecnology,
     rol,
-    salary
+    salary,postulation_job_reclutier,
+    postulation_job_user,
+    save_jobs_user
 }=models
 
 
@@ -25,9 +27,9 @@ return result
 }
 }
 
-static async tecnology_job(Tecnology_id,job_id){
+static async tecnology_job(Tecnology_id,job_id,yearss){
     try {
-        const result= await jobs_tecnology.create({tecnology_id:Tecnology_id,jobs_id:job_id})
+        const result= await jobs_tecnology.create({tecnology_id:Tecnology_id,jobs_id:job_id,years_tecnology:yearss})
         return result
         }
      catch (error) {
@@ -63,6 +65,9 @@ static async putSalary(newsalary,jobId){
 
 static async deleteJob(idJob,userId){
     try {
+        const saveJobsdelete=await save_jobs_user.destroy({where:{jobs_id:idJob}})
+        const deletePostulationRecluiter=await postulation_job_reclutier.destroy({where:{jobs_id:idJob}})
+        const deletepsotulation=await postulation_job_user.destroy({where:{jobs_id:idJob}})
         const deleteSalary=await salary.destroy({where:{job_id:idJob}})
         const deleteTecno=await jobs_tecnology.destroy({where:{jobs_id:idJob}})
         const deleteRol=await jobs_rol.destroy({where:{jobs_id:idJob}})
@@ -73,10 +78,11 @@ static async deleteJob(idJob,userId){
     }
 }
 
-static async putJob(upJob,userId){
+static async putJob(upJob,userId,jobId){
     try {
-        if(!upJob.user_id){
-            const result=await jobs.update(upJob,{where:{id:upJob.id,user_id:userId}})
+        const findJob=await jobs.findOne({where:{id:jobId,user_id:userId}})
+        if(findJob){
+            const result=await jobs.update(upJob,{where:{id:jobId,user_id:userId}})
             return result
         }
     } catch (error) {
@@ -109,7 +115,7 @@ try {
         include:[
             {model:jobs_tecnology,
             as:"jobs_tecnologies",
-            attributes:["tecnology_id"],
+            attributes:["tecnology_id","years_tecnology"],
             include:{
             model:tecnology,
             as:"tecnology",
@@ -131,6 +137,9 @@ try {
             model:company,
             as:"companies"
             }  
+            },
+            {model:salary,
+            as:"salaries"
             }
         ]
     })
@@ -190,6 +199,16 @@ static async deleteCOMpany(iduser,idcompany){
         throw error
     }
 }
+
+static async getcompanyone(id){
+try {
+    const result=await company.findByPk(id)
+return result
+} catch (error) {
+    throw error
+}
+}
+
 
 }
 

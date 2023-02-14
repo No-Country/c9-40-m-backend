@@ -1,6 +1,6 @@
 const models = require("../models/index");
 
-const { rol,rol_tecnology,tecnology } = models;
+const { rol,rol_tecnology,tecnology,user_rol,jobs_rol } = models;
 
 class RolService {
   static async createRol(roll) {
@@ -42,6 +42,8 @@ static async getAllrol(){
 
 static async deleteRol(id){
   try {
+    const deleteJobsrol=jobs_rol.destroy({where:{rol_id:id}})
+    const deleteUserrol=user_rol.destroy({where:{rol_id:id}})
     const deleteTecno=rol_tecnology.destroy({where:{rol_id:id}})
     const result=await rol.destroy({where:{id}})
     return result
@@ -49,6 +51,27 @@ static async deleteRol(id){
     throw error
   }
 }
+
+
+static async createRolbyuser(rolnewuser){
+  try {
+    const result=await user_rol.create(rolnewuser)
+    return result
+  } catch (error) {
+    throw error
+  }
+}
+
+static async deleteRolByuser(iduser,idtecnology){
+  try {
+      const result=await user_rol.destroy({where:{user_id:iduser,tecnology_id:idtecnology}})
+      return result
+  } catch (error) {
+      throw error
+  }
+}
+
+
 
 }
 

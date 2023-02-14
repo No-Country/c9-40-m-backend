@@ -1,4 +1,5 @@
 const RolService = require("../services/rol.service");
+const jwt = require("jsonwebtoken");
 
 const createRool = async (req, res) => {
   try {
@@ -41,9 +42,47 @@ const deleteRoll=async(req,res)=>{
   }
 }
 
+const createRolByuserr=async(req,res)=>{
+  try {
+    const{page=0,size=6}=req.query;
+    let token=req.headers.authorization
+    token=token.replace("Bearer ","")
+    const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
+    const {id}=tokendecode
+    const rolId=req.params.id
+    const newRol={
+      user_id:id,
+      rol_id:rolId
+    }
+    const result=await RolService.createRolbyuser(newRol)
+    res.json(result)
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+}
+
+const deleteRolbyUserr=async(req,res)=>{
+  try {
+    const{page=0,size=6}=req.query;
+    let token=req.headers.authorization
+    token=token.replace("Bearer ","")
+    const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
+    const {id}=tokendecode
+    const rolId=req.params.id
+    const result=await RolService.deleteRolByuser(id,rolId)
+    res.json(result)
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+}
+
+
 module.exports = {
   createRool,
   createRol_tecnology,
   getAllrols,
-  deleteRoll
+  deleteRoll,
+
+  deleteRolbyUserr,
+  createRolByuserr,
 };

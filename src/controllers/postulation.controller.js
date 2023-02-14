@@ -1,5 +1,5 @@
 const postulationServices = require("../services/postulation.service")
-
+const jwt = require("jsonwebtoken");
 
 
 const createPostubyuser=async(req,res)=>{
@@ -10,7 +10,7 @@ const createPostubyuser=async(req,res)=>{
         const {id}=tokendecode
         const idjob=req.params.id
         const result=await postulationServices.createPostulation(id,idjob)
-        res.json(201).json(result)
+        res.status(201).json(result)
     } catch (error) {
         res.status(400).json({message:error})
     }

@@ -40,7 +40,7 @@ class user extends Sequelize.Model {
     article_1: {
       type: DataTypes.STRING(250),
       allowNull: true
-    },
+    }, 
     url_portfolio: {
       type: DataTypes.STRING,
       allowNull: true
