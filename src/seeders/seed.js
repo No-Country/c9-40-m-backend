@@ -24,7 +24,7 @@ const users = [
   {
     firstname: "José",
     lastname: "Riga",
-    email: "joseRiga12@gmail.com",
+    email: "joseriga12@gmail.com",
     password: "18/569",
   },
   {
@@ -36,13 +36,13 @@ const users = [
   {
     firstname: "Dario",
     lastname: "Martinez",
-    email: "Martinez45@gmail.com",
+    email: "martinez45@gmail.com",
     password: "18/569",
   },
   {
     firstname: "Diego",
     lastname: "Diaz",
-    email: "Diaz69@gmail.com",
+    email: "diaz69@gmail.com",
     password: "18/569",
   },
 ];
@@ -173,16 +173,16 @@ const salaryy = [
 
 const tecnologyy = [
   {
-    name: "Java",
+    name: "java",
   },
   {
-    name: "Node JS",
+    name: "node JS",
   },
   {
-    name: "React",
+    name: "react",
   },
   {
-    name: "Figma",
+    name: "figma",
   },
 ];
 
