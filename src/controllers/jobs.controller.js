@@ -109,7 +109,7 @@ const upCompany=async(req,res)=>{
 const deleteJobRol=async(req,res)=>{
     try {
         const {id}=req.params
-        const {rol_id}=req.body
+        const rol_id=req.params.rolId
         const result=await JobsServices.deleteRoljob(id,rol_id)
         res.json(result)
     } catch (error) {
@@ -120,7 +120,7 @@ const deleteJobRol=async(req,res)=>{
 const deleteTecnojob=async(req,res)=>{
     try {
         const {id}=req.params
-        const {tecnology_id}=req.body
+        const tecnology_id=req.params.tecnoid
         const result=await JobsServices.deleteTecnologyjob(id,tecnology_id)
         res.json(result)
     } catch (error) {
@@ -131,7 +131,7 @@ const deleteTecnojob=async(req,res)=>{
 const aggnewTecnology=async(req,res)=>{
     try {
         const {id}=req.params
-        const{tecnology_id}=req.body
+        const tecnology_id=req.params.tecnoid
         const result=await JobsServices.tecnology_job(tecnology_id,id)
         res.json(result)
     } catch (error) {
@@ -142,7 +142,7 @@ const aggnewTecnology=async(req,res)=>{
 const aggrolJob=async(req,res)=>{
     try {
         const {id}=req.params
-        const{rol_id}=req.body
+        const rol_id=req.params.rolId
         const result=await JobsServices.rol_job(rol_id,id)
         res.json(result)
     } catch (error) {

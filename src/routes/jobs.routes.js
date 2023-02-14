@@ -13,10 +13,10 @@ router.delete("/jobs/:id",deleJob)
 router.post("/jobs",createJobb)
 router.put("/jobs/:id",updateJob)
 
-router.post("/jobs/:id/tecnology",aggnewTecnology)
-router.post("/jobs/:id/rol",aggrolJob)
-router.delete("/jobs/:id/tecnology",deleteJobRol)
-router.delete("/jobs/:id/rol",deleteTecnojob)
+router.post("/jobs/:id/tecnology/:tecnoid",aggnewTecnology)
+router.post("/jobs/:id/rol/:rolId",aggrolJob)
+router.delete("/jobs/:id/tecnology/:tecnoid",deleteJobRol)
+router.delete("/jobs/:id/rol/:rolId",deleteTecnojob)
 router.put("/jobs/:id/salary",updateSalary)
 
 //seria con query esta manera /jobs?page=0&size=5
