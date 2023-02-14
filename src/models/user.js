@@ -23,7 +23,10 @@ class user extends Sequelize.Model {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: "user_email_key"
+      unique: "user_email_key",
+      validate:{
+        isEmail:true
+      }
     },
     password: {
       type: DataTypes.STRING,
