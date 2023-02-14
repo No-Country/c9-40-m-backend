@@ -1,5 +1,5 @@
 const JobsServices = require("../services/jobs.service")
-
+const jwt = require("jsonwebtoken");
 
 const createJobb=async(req,res)=>{
     try {
@@ -7,17 +7,15 @@ const createJobb=async(req,res)=>{
         token=token.replace("Bearer ","")
         const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
         const {id}=tokendecode
-        const {title,description,image,company_id,user_id,country,work_place,working_day,tecnologies_job,roles_job,job_salary}=req.body
-        const result=await JobsServices.createJob({title,description,image,company_id,user_id,country,work_place,working_day},id)
+        const {title,description,image,company_id,country,work_place,working_day,tecnologies_job,rol_job_id,job_salary}=req.body
+        const result=await JobsServices.createJob({title,description,image,company_id,country,work_place,working_day},id)
         tecnologies_job.forEach(async tecno_id=>{
-            const createJobtecno=await JobsServices.tecnology_job(tecno_id,result.id)
+        const createJobtecno=await JobsServices.tecnology_job(tecno_id.id_tecno,result.id,tecno_id.years)
         })
-        roles_job.forEach(async rol_id=>{
-            const createRoljob=await JobsServices.rol_job(rol_id,result.id)
-        })
+        const createRoljob=await JobsServices.rol_job(rol_job_id,result.id)
         job_salary.job_id=result.id
         const createdSalary=await JobsServices.postSalary(job_salary)
-        res.status(201).json({message:"job created ;)"},result)
+        res.status(201).json({message:"job created ;)",result})
     } catch (error) {
         res.status(400).json({message:"error"})
     }
@@ -30,8 +28,9 @@ const updateJob=async(req,res)=>{
         const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
         const {id}=tokendecode
         const updateJob=req.body
-        const result= await JobsServices.putJob(updateJob,id)
-        res.json({message:"job update"},result)
+        const jobId=req.params.id
+        const result= await JobsServices.putJob(updateJob,id,jobId)
+        res.json({message:"job update",result})
     } catch (error) {
         res.status(400).json({message:"error"})
     }
@@ -178,6 +177,17 @@ const deleteCompany=async(req,res)=>{
 }
 }
 
+
+const infoCompany=async(req,res)=>{
+    try {
+        const idcompany=req.params.id
+        const result=await JobsServices.getcompanyone(idcompany)
+        res.json(result)
+    } catch (error) {
+        res.status(400).json({message:"error"})
+    }
+}
+
 module.exports={
     getJobforOne,
     deleJob,
@@ -188,8 +198,10 @@ module.exports={
     createCompany,
     upCompany,
     deleteCompany,
+    infoCompany,
 
     aggnewTecnology,
+    
     aggrolJob,
     deleteJobRol,
     deleteTecnojob,

@@ -11,7 +11,6 @@ try {
         include:{
             model:jobs,
             as:"job",
-            attributes:{exclude:["id"]}
         }
     })
     return result

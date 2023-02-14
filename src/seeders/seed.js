@@ -54,10 +54,10 @@ const jobss = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     image:
       "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    user_id:1,
     country: "Uruguay",
     work_place: "Remote",
     working_day: "Part-time",
-    user_id: 1,
   },
 
   {
@@ -66,10 +66,10 @@ const jobss = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     image:
       "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    user_id:2,
     country: "Argentina",
     work_place: "Presencial",
     working_day: "Full-Time",
-    user_id: 2,
   },
 
   {
@@ -78,10 +78,10 @@ const jobss = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     image:
       "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    user_id:3,
     country: "Colombia",
     work_place: "Remote",
     working_day: "Full-Time",
-    user_id: 3,
   },
 
   {
@@ -90,10 +90,10 @@ const jobss = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     image:
       "https://www.simplilearn.com/ice9/free_resources_article_thumb/tester-or-developer-what-suits-you-the-most.jpg",
+    user_id:4,
     country: "Venezuela",
     work_place: "Remote",
     working_day: "Full-Time",
-    user_id: 4,
   },
 ];
 
@@ -189,22 +189,22 @@ const tecnologyy = [
 const savesJobUser = [
   {
     user_id: 1,
-    job_id: 4,
+    jobs_id: 4,
   },
 
   {
     user_id: 2,
-    job_id: 3,
+    jobs_id: 3,
   },
 
   {
     user_id: 3,
-    job_id: 2,
+    jobs_id: 2,
   },
 
   {
     user_id: 4,
-    job_id: 1,
+    jobs_id: 1,
   },
 ];
 
@@ -266,10 +266,11 @@ const companyy = [
   {
     user_id: 1,
     name: "Agro Company IT",
-    contry: "Brasil",
+    country: "Brasil",
     city: "San Pablo",
     phone: "15648466",
     adress: "Jao Marco 54",
+    email:"damiancompany@gmail.com",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     website: "https://www.adecoagro.com/",
@@ -279,10 +280,11 @@ const companyy = [
   {
     user_id: 2,
     name: "Consultors IT",
-    contry: "Argentina",
+    country: "Argentina",
     city: "CABA",
     phone: "1564888466",
     adress: "Saavedra 451",
+    email:"crismarcompany@gmail.com",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     website: "https://www.adecoagro.com/",
@@ -292,10 +294,11 @@ const companyy = [
   {
     user_id: 3,
     name: "Drako IT",
-    contry: "Uruguay",
+    country: "Uruguay",
     city: "Montevideo",
     phone: "158484963",
     adress: "Llanez 21",
+    email:"naocompany@gmail.com",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     website: "https://www.adecoagro.com/",
@@ -305,10 +308,11 @@ const companyy = [
   {
     user_id: 4,
     name: "Education IT",
-    contry: "Argentina",
+    country: "Argentina",
     city: "CABA",
     phone: "864565",
     adress: "Lavalle 235",
+    email:"bryancompany@gmail.com",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     website: "https://www.adecoagro.com/",
@@ -319,22 +323,26 @@ const companyy = [
 const jobs_tecnologyy = [
   {
     jobs_id: 1,
-    rol_id: 1,
+    tecnology_id: 1,
+    years_tecnology:1
   },
 
   {
     jobs_id: 2,
-    rol_id: 2,
+    tecnology_id: 2,
+    years_tecnology:1
   },
 
   {
     jobs_id: 3,
-    rol_id: 3,
+    tecnology_id: 3,
+    years_tecnology:1
   },
 
   {
     jobs_id: 4,
-    rol_id: 4,
+    tecnology_id: 4,
+    years_tecnology:1
   },
 ];
 
@@ -364,47 +372,47 @@ const matchh = [
 const jobs_roll = [
   {
     rol_id: 1,
-    jobs_rol: 1,
+    jobs_id: 1,
   },
 
   {
     rol_id: 2,
-    jobs_rol: 2,
+    jobs_id: 2,
   },
 
   {
     rol_id: 3,
-    jobs_rol: 3,
+    jobs_id: 3,
   },
 
   {
     rol_id: 4,
-    jobs_rol: 4,
+    jobs_id: 4,
   },
 ];
 
 const postulation_job_userr = [
   {
     user_id: 1,
-    job_id: 4,
+    jobs_id: 4,
     state: "waiting",
   },
 
   {
     user_id: 2,
-    job_id: 3,
+    jobs_id: 3,
     state: "waiting",
   },
 
   {
     user_id: 3,
-    job_id: 2,
+    jobs_id: 2,
     state: "waiting",
   },
 
   {
     user_id: 4,
-    job_id: 1,
+    jobs_id: 1,
     state: "waiting",
   },
 ];
@@ -515,7 +523,7 @@ db.sync({ force: true }).then(() => {
 
   setTimeout(() => {
     jobss.forEach((j) => jobs.create(j));
-  }, 100);
+  }, 150);
 
   setTimeout(() => {
     rols.forEach((r) => rol.create(r));

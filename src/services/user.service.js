@@ -13,13 +13,16 @@ const {
     match,
     jobs_rol,
     jobs_tecnology,
-    company
+    company,
+    repository
 } = models
 
 class UserService {
 
     static async deleteUser(id) {
         try {
+            const prote=await projects.destroy({where:{user_id:id}})
+            const repo=await repository.destroy({where:{user_id:id}})
             const userrolz=await user_rol.destroy({where:{user_id:id}})
             const user_rolldelete=await user_tecnology.destroy({where:{user_id:id}})
             const posuser=await postulation_job_reclutier.destroy({where:{user_id:id}})
@@ -69,27 +72,9 @@ class UserService {
 
     static async getOne(id){
         try {
-            const result=await user.findByPk(id,{
+            const result=await user.findAll({
+                where:{id},
                 include:[
-                    /* 
-                    {model:match,
-                    as:"matches",
-                    attributes:["jobs_id"],
-                    include:{
-                    model:jobs,
-                    as:"job",
-                    attributes:{exclude:["id"]}
-                    }
-                    },*/
-                    {model:user_tecnology,
-                    as:"user_tecnology",
-                    attributes:["tecnolgy_id"],
-                    include:{
-                        model:tecnology,
-                        as:"tecnolgy",
-                        attributes:["name"]
-                    }
-                    },
                     {model:user_rol,
                     as:"user_rols",
                     attributes:["rol_id"],
@@ -99,6 +84,12 @@ class UserService {
                         attributes:["name"]
                     }
                     },
+                    {model:projects,
+                    as:"projects"
+                    },
+                    {model:repository,
+                    as:"repositories"
+                    }
                     /* 
                     {model:postulation_job_user,
                     as:"postulation_job_users",

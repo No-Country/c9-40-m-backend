@@ -7,13 +7,22 @@ class postulationServices{
 
 static async createPostulation(idUser,idJob){
     try {
+        const find=await postulation_job_user.findOne({where:{jobs_id:idJob,user_id:idUser}})
+        const postulatio={
+            user_id:idUser,
+            jobs_id:idJob,
+            state: "waiting"}
         const findJob=await jobs.findOne({where:{id:idJob,user_id:idUser}})
         if(findJob){
             return {message:"no puede postular a una vacante que usted publicó"}
         }else{
-        const postReclutier=await postulation_job_reclutier.create({user_id:idUser,jobs_id:idJob,state:"waiting"})
-        const result=await postulation_job_user.create({user_id:idUser,jobs_id:idJob,state:"waiting"})
+        if(find){
+            return {message:"ya usted postulo a este trabajo"}
+        }else{
+        const postReclutier=await postulation_job_reclutier.create(postulatio)
+        const result=await postulation_job_user.create(postulatio)
         return result
+        }
         }
     } catch (error) {
         throw error
@@ -56,11 +65,12 @@ static async getpostulationByuser(id,size,page){
             where:{user_id:id},
             attributes:{exclude:["user_id"]},
             include:{
-            model: jobs,
-            as:"job",
+                model: jobs,
+                as:"job",
             }
+            
         })
-        return ({total:result.count,Postulation_job:result.rows})
+        return result//({total:result.count,Postulation_job:result.rows})
     } catch (error) {
         throw error
     }
@@ -70,7 +80,7 @@ static async getPostulationbyJob(id){
     try {
         const result=await postulation_job_reclutier.findAll({
             where:{jobs_id:id},
-            attributes:{exclude:["user_id"]},
+            attributes:["user_id"],
             where:{user_id:id},
             include:{
             model: jobs,
