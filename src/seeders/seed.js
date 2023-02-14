@@ -517,7 +517,7 @@ const repositoryy = [
   },
 ];
 
-db.sync({ force: true }).then(() => {
+db.sync({ alter: true }).then(() => {
   console.log("sincronizando");
   users.forEach((u) => user.create(u));
 
