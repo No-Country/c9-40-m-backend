@@ -1,17 +1,18 @@
 const AuthServices = require("../services/auth.service")
 const transporter=require("../utils/mailer")
+const jwt = require("jsonwebtoken");
 
 const register=async(req,res)=>{
     try {
     const user=req.body
     const result=await AuthServices.register(user)
 if(result){
-    res.status(201).json({message:"user created"})
+    res.status(201).json({message:"user created",result})
     await transporter.sendMail({
         to:result.email,
-        from:"bryandavidaaa@gmail.com",
-        subject:"email confirmado",
-        html:"<h1>bienvenido a la mejor app del chat creada por mi bryan</h1> <p>tienes que confirmar tu email dando click en</p> <a href=youtube.com>aqui :3</a>"
+        from:"jobsmatch23@gmail.com",
+        subject:"confirme su email",
+        html:"<h2>hola</h2>"
     })
 }else{res.status(400).json({message:"somethign wrong"})}
     } catch (error) {

@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const bcrypt=require("bcrypt")
 module.exports = (sequelize, DataTypes) => {
   return user.init(sequelize, DataTypes);
 }
@@ -15,11 +16,9 @@ class user extends Sequelize.Model {
     },
     firstname: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     lastname: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -41,22 +40,19 @@ class user extends Sequelize.Model {
     article_1: {
       type: DataTypes.STRING(250),
       allowNull: true
-    },
+    }, 
     url_portfolio: {
       type: DataTypes.STRING,
       allowNull: true
     },
     age: {
       type: DataTypes.INTEGER,
-      allowNull: false
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     region: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     is_verify: {
       type: DataTypes.BOOLEAN,
@@ -68,6 +64,13 @@ class user extends Sequelize.Model {
       allowNull: true
     }
   }, {
+    hooks:{
+      beforeCreate:(user,options)=>{
+          const {password}=user;
+          const hash=bcrypt.hashSync(password,10)
+          user.password=hash;
+      }
+  },
     sequelize,
     tableName: 'user',
     schema: 'public',

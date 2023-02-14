@@ -21,7 +21,7 @@ class jobs_tecnology extends Sequelize.Model {
         key: 'id'
       }
     },
-    tecnolgy_id: {
+    tecnology_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

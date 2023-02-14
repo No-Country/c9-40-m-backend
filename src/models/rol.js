@@ -16,7 +16,7 @@ class rol extends Sequelize.Model {
     name: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
   }, {
     sequelize,
     tableName: 'rol',
