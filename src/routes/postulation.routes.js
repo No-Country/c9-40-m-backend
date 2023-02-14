@@ -4,7 +4,7 @@ const { deletePostulationbyReclutier, getPostulationByjobb, getPostulationbyUser
 const router=Router()
 
 router.delete("/postulation_reclutier/user/:id_user/job/:id_job",deletePostulationbyReclutier)
-router.get("/postulation/recluter",getPostulationByjobb)
+router.get("/postulation/recluter/job/:id",getPostulationByjobb)
 
 
 router.get("/postulation/user",getPostulationbyUserr)
