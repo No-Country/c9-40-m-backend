@@ -109,8 +109,8 @@ const upCompany=async(req,res)=>{
 const deleteJobRol=async(req,res)=>{
     try {
         const {id}=req.params
-        const {rol_id}=req.body
-        const result=await JobsServices.deleteRoljob(id,rol_id)
+        const rolid=req.params.rolId
+        const result=await JobsServices.deleteRoljob(id,rolid)
         res.json(result)
     } catch (error) {
         res.status(400).json({message:"error"})
@@ -120,8 +120,8 @@ const deleteJobRol=async(req,res)=>{
 const deleteTecnojob=async(req,res)=>{
     try {
         const {id}=req.params
-        const {tecnology_id}=req.body
-        const result=await JobsServices.deleteTecnologyjob(id,tecnology_id)
+        const idtecnology=req.params.tecnoid
+        const result=await JobsServices.deleteTecnologyjob(id,idtecnology)
         res.json(result)
     } catch (error) {
         res.status(400).json({message:"error"})
@@ -131,8 +131,8 @@ const deleteTecnojob=async(req,res)=>{
 const aggnewTecnology=async(req,res)=>{
     try {
         const {id}=req.params
-        const{tecnology_id}=req.body
-        const result=await JobsServices.tecnology_job(tecnology_id,id)
+        const idtecnology=req.params.tecnoid
+        const result=await JobsServices.tecnology_job(idtecnology,id)
         res.json(result)
     } catch (error) {
         res.status(400).json({message:"error"})
@@ -142,8 +142,8 @@ const aggnewTecnology=async(req,res)=>{
 const aggrolJob=async(req,res)=>{
     try {
         const {id}=req.params
-        const{rol_id}=req.body
-        const result=await JobsServices.rol_job(rol_id,id)
+        const rolid=req.params.rolId
+        const result=await JobsServices.rol_job(rolid,id)
         res.json(result)
     } catch (error) {
         res.status(400).json({message:"error"})
