@@ -1,8 +1,8 @@
 const usersRoutes = require("./user.routes");
 const authRoutes = require("./auth.routes");
 const rolRoutes = require("./rol.routes");
-const matchRoutes=require("./matche.routes")
-const postulatioRoutes=require("./postulation.routes")
+const matchRoutes=require("./matche.routes");
+const postulatioRoutes=require("./postulation.routes");
 const proyects_and_repositoriesRoutes=require("./proyects_and_repository.routes")
 const jobsRoutes = require("./jobs.routes");
 const saveJobsUserRoutes = require("./saveJobsUser.routes");
