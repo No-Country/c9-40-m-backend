@@ -15,6 +15,7 @@ router.put("/jobs/:id",updateJob)
 
 router.get("/jobs/user",jobscreateByuser)
 
+
 router.post("/jobs/:id/tecnology/:tecnoid",aggnewTecnology)
 router.post("/jobs/:id/rol/:rolId",aggrolJob)
 router.delete("/jobs/:id/tecnology/:tecnoid",deleteJobRol)
