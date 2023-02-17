@@ -156,7 +156,24 @@ static async getAlljobs(page,size){
             limit: Number(size),
             offset: Number(page) * Number(size)
             }
-        const result=await jobs.findAndCountAll(options)
+        const result=await jobs.findAndCountAll(
+            {
+                limit:options.limit,
+                offset:options.offset,
+                include:[
+                {
+                model:company,
+                as:"company",
+                attributes:["name"]
+                },
+                {
+                model:user,
+                as:"user",
+                attributes:["firstname","lastname","email"]
+                } 
+                ]
+            }
+        )
        return({total:result.count,jobs:result.rows}) 
      } catch (error) {
         throw error

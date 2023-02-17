@@ -13,6 +13,7 @@ router.delete("/jobs/:id",deleJob)
 router.post("/jobs",createJobb)
 router.put("/jobs/:id",updateJob)
 
+
 router.post("/jobs/:id/tecnology/:tecnoid",aggnewTecnology)
 router.post("/jobs/:id/rol/:rolId",aggrolJob)
 router.delete("/jobs/:id/tecnology/:tecnoid",deleteJobRol)
