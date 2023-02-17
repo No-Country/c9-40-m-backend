@@ -24,5 +24,4 @@ router.put("/jobs/:id/salary",updateSalary)
 //seria con query esta manera /jobs?page=0&size=5
 router.get("/jobs",getjobs)
 
-
 module.exports=router
