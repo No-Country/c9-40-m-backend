@@ -2,6 +2,8 @@ const models = require("../models/index");
 const bcrypt=require("bcrypt")
 const {
     user,
+    avatar,
+    cv,
     user_tecnology,
     user_rol,
     tecnology,

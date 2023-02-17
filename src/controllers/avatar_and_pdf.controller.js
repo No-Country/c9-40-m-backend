@@ -1,0 +1,1 @@
+const Avatar_and_Pdf_Services = require("../services/avatar_and_pdf.service")
