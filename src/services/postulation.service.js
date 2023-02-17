@@ -70,7 +70,7 @@ static async getpostulationByuser(id,size,page){
             }
             
         })
-        return result//({total:result.count,Postulation_job:result.rows})
+        return ({total:result.count,Postulation_job:result.rows})
     } catch (error) {
         throw error
     }

@@ -173,16 +173,16 @@ const salaryy = [
 
 const tecnologyy = [
   {
-    name: "Java",
+    name: "java",
   },
   {
-    name: "Node JS",
+    name: "node JS",
   },
   {
-    name: "React",
+    name: "react",
   },
   {
-    name: "Figma",
+    name: "figma",
   },
 ];
 
@@ -517,7 +517,8 @@ const repositoryy = [
   },
 ];
 
-db.sync({ alter: true }).then(() => {
+
+db.sync({ force: true }).then(() => {
   console.log("sincronizando");
   users.forEach((u) => user.create(u));
 

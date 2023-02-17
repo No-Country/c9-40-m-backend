@@ -8,7 +8,7 @@ const createMatchh=async(req,res)=>{
         const result=await MatchServices.createMatch(user,id)
         res.status(201).json({message:"matches success",result})
     } catch (error) {
-        res.status(400).json({message:error})
+        res.status(400).json({message:"error al hacer match, verifique si el usuario esta postulado al trabajo"})
     }
 }
 
@@ -23,7 +23,7 @@ const getMatchbyuser=async(req,res)=>{
         const result=await MatchServices.getMatches(id)
         res.json(result)
     } catch (error) {
-        res.status(400).json({message:error})
+        res.status(400).json({message:"error de solicitud o token expirado"})
     }
 }
 
@@ -37,7 +37,7 @@ const deleteMatchbyuser=async(req,res)=>{
         const result=await MatchServices.deleteMatch(jobId,id)
         res.json(result)
     } catch (error) {
-        res.status(400).json({message:error})
+      res.status(400).json({message:"hubo un error al eliminar tu postulacion puede ser que no fuiste seleccionado"})
     }
 }
 
