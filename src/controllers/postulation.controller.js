@@ -10,9 +10,9 @@ const createPostubyuser=async(req,res)=>{
         const {id}=tokendecode
         const idjob=req.params.id
         const result=await postulationServices.createPostulation(id,idjob)
-        res.status(201).json(result)
+        res.status(201).json({message:"ha postulado a este trabajo"})
     } catch (error) {
-        res.status(400).json({message:error})
+        res.status(400).json({message:"error al postular revise si el id del trabajo existe"})
     }
 }
 
@@ -24,7 +24,7 @@ const deletePostulationbyUser=async(req,res)=>{
         const {id}=tokendecode
         const idjob=req.params.id
         const result=await postulationServices.deletePostulationUser(id,idjob)
-        res.json(result)
+        res.json({message:"la postulacion fue eliminada con exito"})
     } catch (error) {
         res.status(400).json({message:error})
     }
@@ -35,7 +35,7 @@ const deletePostulationbyReclutier=async(req,res)=>{
         const idjob=req.params.id_job
         const iduser=req.params.id_user
         const result=await postulationServices.deletePostulationRecluiter(iduser,idjob)
-        res.json(result)
+        res.json({message:"la postulacion fue eliminada con exito"})
     } catch (error) {
         res.status(400).json({message:error})
     }
@@ -51,7 +51,7 @@ const getPostulationbyUserr=async(req,res)=>{
         const result=await postulationServices.getpostulationByuser(id,size,page)
         res.json(result)
     } catch (error) {
-        res.status(400).json({message:error})
+        res.status(400).json({message:"error al obtener las postulaciones "})
     }
 }
 
