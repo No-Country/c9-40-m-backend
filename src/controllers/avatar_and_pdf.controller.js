@@ -96,7 +96,6 @@ const updatePdf = async (req, res) => {
     const { id } = tokendecode;
     const idPdf = req.params.id;
     const newPdf = req.body;
-
     const result = await Avatar_and_Pdf_Services.updatePdf(newPdf, id, idPdf);
     res.json(result);
   } catch (error) {
