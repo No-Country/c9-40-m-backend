@@ -7,6 +7,7 @@ const RoutesApp = require("./routes/index");
 const fileUpload = require("express-fileupload");
 
 const app = express();
+app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(
@@ -17,6 +18,7 @@ app.use(
 );
 app.use(cors());
 app.use(morgan("tiny"));
+
 RoutesApp(app);
 
 db.authenticate()
