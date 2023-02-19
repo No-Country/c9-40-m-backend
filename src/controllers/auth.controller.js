@@ -78,7 +78,7 @@ if(result){
         res.status(400).json({message:"error"})
     }
 }
-
+//ready
 const login=async(req,res)=>{
 try {
 const {email,password}=req.body;
