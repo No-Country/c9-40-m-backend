@@ -32,6 +32,11 @@ class user extends Sequelize.Model {
       type: DataTypes.STRING,
       allowNull: false
     },
+    years_experience:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
     avatar: {
       type: DataTypes.STRING,
       allowNull: true
