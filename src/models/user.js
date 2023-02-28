@@ -14,6 +14,11 @@ class user extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
+    premiun:{
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue:false
+    },
     firstname: {
       type: DataTypes.STRING,
     },
