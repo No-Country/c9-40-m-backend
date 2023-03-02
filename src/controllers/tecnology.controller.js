@@ -36,14 +36,8 @@ const createtecnoByuserr=async(req,res)=>{
         token=token.replace("Bearer ","")
         const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
         const {id}=tokendecode
-        const tecnoId=req.params.id
-        const yeastecno=req.params.year
-        const tecnoUser={
-            user_id:id,
-            tecnology_id:tecnoId,
-            years_tecnology:yeastecno
-        };
-        const result=await tecnologyServices.createTecnoByuser(tecnoUser)
+        const tecnos=req.body
+        const result=await tecnologyServices.createTecnoByuser(tecnos,id)
         res.json(result)
     } catch (error) {
         res.status(400).json({ message: error });
@@ -64,6 +58,24 @@ const deleteTecnobyUser=async(req,res)=>{
     }
 }
 
+const updateTecnobyUser=async(req,res,next)=>{
+    try {
+        let token=req.headers.authorization
+        token=token.replace("Bearer ","")
+        const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
+        const {id}=tokendecode
+        const tecnoId=req.params.id
+        const yeastecno=req.params.year
+        const upTecno={
+            years_tecnology:yeastecno
+        };
+      const result=await tecnologyServices.updateTecnobyuser(id,tecnoId,upTecno)
+      res.json({message:"tecnology years update :)",result}) 
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getAlltecnologyByuser=async(req,res)=>{
     try {
         let token=req.headers.authorization
@@ -76,6 +88,7 @@ const getAlltecnologyByuser=async(req,res)=>{
         res.status(400).json({ message: error });
     }
 }
+
 module.exports={
     tecnologyCreate,
     getAlltecnology,
@@ -83,5 +96,6 @@ module.exports={
 
     deleteTecnobyUser,
     createtecnoByuserr,
-    getAlltecnologyByuser
+    getAlltecnologyByuser,
+    updateTecnobyUser
 }

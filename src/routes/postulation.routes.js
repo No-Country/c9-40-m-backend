@@ -7,6 +7,7 @@ router.delete("/postulation_reclutier/user/:id_user/job/:id_job",deletePostulati
 router.get("/postulation/recluter/job/:id",getPostulationByjobb)
 
 
+//en postulation/user?page=0&size=5
 router.get("/postulation/user",getPostulationbyUserr)
 router.post("/postulation/user/job/:id",createPostubyuser)
 router.delete("/postulation/user/job/:id",deletePostulationbyUser)

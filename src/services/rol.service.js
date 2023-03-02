@@ -12,11 +12,14 @@ class RolService {
     }
   }
 
-static async createrolTecnology(rolId,tecnoId){
+static async createrolTecnology(rolId,tecnoArray){
   try {
-    const result=await rol_tecnology.create({rol_id:rolId,tecnology_id:tecnoId})
+    tecnoArray.forEach(async tecno =>{
+    const result=await rol_tecnology.create({rol_id:rolId,tecnology_id:tecno})
+    return result
+    })
   } catch (error) {
-    
+    throw error
   }
 }
 
@@ -62,15 +65,23 @@ static async createRolbyuser(rolnewuser){
   }
 }
 
-static async deleteRolByuser(iduser,idtecnology){
+static async deleteRolByuser(iduser,rolId){
   try {
-      const result=await user_rol.destroy({where:{user_id:iduser,tecnology_id:idtecnology}})
+      const result=await user_rol.destroy({where:{user_id:iduser,rol_id:rolId}})
       return result
   } catch (error) {
       throw error
   }
 }
 
+static async deleteTecnoinRol(idtecno,rolId){
+  try {
+    const result=await rol_tecnology.destroy({where:{rol_id:rolId,tecnology_id:idtecno}})
+    return result
+  } catch (error) {
+    throw error
+  }
+}
 
 
 }

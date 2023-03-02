@@ -140,49 +140,37 @@ const userRol = [
 const salaryy = [
   {
     job_id: 1,
-    price_min: 300,
-    price_max: 500,
     price: 400,
-    to_agree: true,
   },
 
   {
     job_id: 2,
-    price_min: 500,
-    price_max: 900,
     price: 600,
-    to_agree: true,
   },
 
   {
     job_id: 3,
-    price_min: 1000,
-    price_max: 1200,
     price: 900,
-    to_agree: true,
   },
 
   {
     job_id: 4,
-    price_min: 400,
-    price_max: 600,
     price: 450,
-    to_agree: true,
   },
 ];
 
 const tecnologyy = [
   {
-    name: "Java",
+    name: "java",
   },
   {
-    name: "Node JS",
+    name: "node JS",
   },
   {
-    name: "React",
+    name: "react",
   },
   {
-    name: "Figma",
+    name: "figma",
   },
 ];
 
@@ -517,7 +505,8 @@ const repositoryy = [
   },
 ];
 
-db.sync({ alter: true }).then(() => {
+
+db.sync({ force: true }).then(() => {
   console.log("sincronizando");
   users.forEach((u) => user.create(u));
 
