@@ -1,5 +1,5 @@
 const {Router}=require("express")
-const { tecnologyCreate, deleteTecnology, getAlltecnology, deleteTecnobyUser, createtecnoByuserr, getAlltecnologyByuser } = require("../controllers/tecnology.controller")
+const { tecnologyCreate, deleteTecnology, getAlltecnology, deleteTecnobyUser, createtecnoByuserr, getAlltecnologyByuser, updateTecnobyUser } = require("../controllers/tecnology.controller")
 
 const router=Router()
 
@@ -9,8 +9,8 @@ router.delete("/tecnology/:id",deleteTecnology)
 
 router.get("/user_tecnology",getAlltecnologyByuser)
 
-router.post("/user_tecnology/:id/years/:year",createtecnoByuserr)
+router.post("/user_tecnology",createtecnoByuserr)
 router.delete("/user_tecnology/:id",deleteTecnobyUser)
-
+router.put("/user_tecnology/:id/years/:year",updateTecnobyUser)
 
 module.exports=router

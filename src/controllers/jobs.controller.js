@@ -7,8 +7,23 @@ const createJobb=async(req,res)=>{
         token=token.replace("Bearer ","")
         const tokendecode=jwt.verify(token,process.env.JWT_SECRET)
         const {id}=tokendecode
-        const {title,description,image,company_id,country,work_place,working_day,tecnologies_job,rol_job_id,job_salary}=req.body
+        const {company_name,title,description,image,country,work_place,working_day,tecnologies_job,rol_job_id,job_salary}=req.body
+        const dateFake={
+            user_id:16,
+            name: company_name,
+            country:"venezuela",
+            city:"maracaibo",
+            phone:"+584121052569" ,
+            email:"companyexpress@gmail.com",
+            adress:"direccionfalsa",
+            description:"somos una empresa lider en tecnologia numero 1 en america",
+            website:"youssef_notemolestes_porfa.com"
+        }
+        const createCompany=await JobsServices.createCompanyyWithjob(dateFake)
+        const{company_id=createCompany.id}=req.body
         const result=await JobsServices.createJob({title,description,image,company_id,country,work_place,working_day},id)
+        
+        
         tecnologies_job.forEach(async tecno_id=>{
         const createJobtecno=await JobsServices.tecnology_job(tecno_id.id_tecno,result.id,tecno_id.years)
         })
@@ -18,6 +33,15 @@ const createJobb=async(req,res)=>{
         res.status(201).json({message:"job created ;)",result})
     } catch (error) {
         res.status(400).json({message:"error, puede ser que un campo no fue llenado y necesita ser registrado"})
+    }
+}
+
+const allCompany=async(req,res)=>{
+    try {
+       const result=await JobsServices.findAllcompany()
+       res.json(result)
+    } catch (error) {
+        throw error
     }
 }
 
@@ -74,9 +98,9 @@ const getJobforOne=async(req,res)=>{
 
 const getjobs=async(req,res)=>{
     try {
-        const{page=0,size=6}=req.query;
-
-        const result=await JobsServices.getAlljobs(page,size)
+        const{page=0,size=6,rol}=req.query;
+        const idRol=Number(rol)
+        const result=await JobsServices.getAlljobs(page,size,idRol)
         res.json(result)
     } catch (error) {
        res.status(400).json({message:"error en la peticion"})
@@ -109,7 +133,6 @@ const upCompany=async(req,res)=>{
 const deleteJobRol=async(req,res)=>{
     try {
         const {id}=req.params
-
         const rol_id=req.params.rolId
         const result=await JobsServices.deleteRoljob(id,rol_id)
         res.json(result)
@@ -203,7 +226,7 @@ module.exports={
     infoCompany,
 
     aggnewTecnology,
-    
+    allCompany,
     aggrolJob,
     deleteJobRol,
     deleteTecnojob,

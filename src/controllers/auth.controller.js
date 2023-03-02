@@ -67,7 +67,7 @@ if(result){
             <h1>✔️CONFIRMACION DE EMAIL📱</h1>
             <p>💼Bienvenido a Jobs match tu mejor opcion a la hora de buscar trabajo :)💼</p>
             <small>presiona el boton para verificarlo</small>
-            <a href="http://localhost:9000/api/v1/auth/verify_email/joseRiga12@gmail.com">Verificarlo</a>
+            <a href="https://jobs-matches.netlify.app/#/verify/${result.email}/num/${result.id}">Verificarlo</a>
           </section>
         </section>
         </body>
@@ -78,7 +78,7 @@ if(result){
         res.status(400).json({message:"error"})
     }
 }
-
+//ready
 const login=async(req,res)=>{
 try {
 const {email,password}=req.body;
@@ -107,6 +107,31 @@ const verifyEmailUser=async(req,res)=>{
         res.status(400).json({message:"error la correo"})
     }
 }
+
+
+/*
+const recover_password=async(req,res)=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports={
     register,

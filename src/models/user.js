@@ -14,6 +14,11 @@ class user extends Sequelize.Model {
       allowNull: false,
       primaryKey: true
     },
+    premiun:{
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue:false
+    },
     firstname: {
       type: DataTypes.STRING,
     },
@@ -32,19 +37,32 @@ class user extends Sequelize.Model {
       type: DataTypes.STRING,
       allowNull: false
     },
+    years_experience:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
     avatar: {
       type: DataTypes.STRING,
       allowNull: true
     },
     about_me: {
-      type: DataTypes.STRING(300),
+      type: DataTypes.STRING(500),
       allowNull: true
     },
     article_1: {
-      type: DataTypes.STRING(250),
+      type: DataTypes.STRING(550),
       allowNull: true
-    }, 
-    url_portfolio: {
+    },
+    status:{
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    url_github:{
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    url_linkedin: {
       type: DataTypes.STRING,
       allowNull: true
     },
